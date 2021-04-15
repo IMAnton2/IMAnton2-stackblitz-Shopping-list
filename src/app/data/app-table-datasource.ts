@@ -4,6 +4,7 @@ import { MatSort } from '@angular/material/sort';
 import { map } from 'rxjs/operators';
 import { Observable, of as observableOf, merge } from 'rxjs';
 import { AppTableItem } from './data-model';
+import { OnInit } from '@angular/core';
 
 // TODO: Replace this with your own data model type
 
@@ -37,14 +38,15 @@ const EXAMPLE_DATA: AppTableItem[] = [
  * encapsulate all logic for fetching and manipulating the displayed data
  * (including sorting, pagination, and filtering).
  */
-export class AppTableDataSource extends DataSource<AppTableItem> {
-  data: AppTableItem[] = EXAMPLE_DATA;
+export class AppTableDataSource extends DataSource<AppTableItem>{
+  data: AppTableItem[] = [];
   paginator: MatPaginator | undefined;
   sort: MatSort | undefined;
-
   constructor() {
     super();
   }
+
+
 
   /**
    * Connect this data source to the table. The table will only update when
