@@ -1,4 +1,4 @@
-import { Component, ViewChild } from "@angular/core";
+import { Component, OnInit, ViewChild } from "@angular/core";
 import { BreakpointObserver, Breakpoints } from "@angular/cdk/layout";
 import { Observable } from "rxjs";
 import { map, shareReplay } from "rxjs/operators";
@@ -10,7 +10,7 @@ import { DataService } from "../data/data.service";
   templateUrl: "./main-nav.component.html",
   styleUrls: ["./main-nav.component.css"]
 })
-export class MainNavComponent {
+export class MainNavComponent implements OnInit {
   @ViewChild("slider", { static: false })
   slider: ElementRef;
 
@@ -29,6 +29,9 @@ export class MainNavComponent {
     console.log("test", slider);
   }
   testing() {
+    this.dbService.fatchData();
+  }
+  ngOnInit() {
     this.dbService.fatchData();
   }
 }
