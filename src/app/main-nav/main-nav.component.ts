@@ -3,6 +3,7 @@ import { BreakpointObserver, Breakpoints } from "@angular/cdk/layout";
 import { Observable } from "rxjs";
 import { map, shareReplay } from "rxjs/operators";
 import { ElementRef } from "@angular/core";
+import { DataService } from "../data/data.service";
 
 @Component({
   selector: "app-main-nav",
@@ -19,9 +20,15 @@ export class MainNavComponent {
       map(result => result.matches),
       shareReplay()
     );
+  constructor(
+    private breakpointObserver: BreakpointObserver,
+    private dbService: DataService
+  ) {}
+
   update(slider: string) {
     console.log("test", slider);
   }
-
-  constructor(private breakpointObserver: BreakpointObserver) {}
+  testing() {
+    this.dbService.fatchData();
+  }
 }
