@@ -1,33 +1,51 @@
-import { AfterViewInit, Component, Input, ViewChild } from "@angular/core";
+import {
+  AfterViewInit,
+  Component,
+  Input,
+  OnInit,
+  ViewChild
+} from "@angular/core";
 import { MatPaginator } from "@angular/material/paginator";
 import { MatSort } from "@angular/material/sort";
-import { MatTable } from "@angular/material/table";
+import { MatTable, MatTableDataSource } from "@angular/material/table";
 import { AppTableItem } from "../data/data-model";
 import { AppTableDataSource } from "../data/app-table-datasource";
+import { DataService } from "../data/data.service";
 
 @Component({
   selector: "app-app-table",
   templateUrl: "./app-table.component.html",
   styleUrls: ["./app-table.component.css"]
 })
-export class AppTableComponent implements AfterViewInit {
+export class AppTableComponent implements AfterViewInit, OnInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatTable) table!: MatTable<AppTableItem>;
-  dataSource: AppTableDataSource;
+  displayedColumns = ["id", "name"];
+
+  dataSource = new MatTableDataSource<AppTableItem>(); //AppTableDataSource();
   @Input() itemPerPage = 7;
 
   /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
-  displayedColumns = ["id", "name"];
 
-  constructor() {
-    this.dataSource = new AppTableDataSource();
+  constructor(private dataService: DataService) {}
+
+  ngOnInit() {
     this.dataSource.data.push({ id: 1, name: "Hydrogen" });
+    this.dataSource.data.push({ id: 1, name: "Hydrogen" });
+    this.dataSource.data.push({ id: 1, name: "Hydrogen" });
+    this.dataService.recipesChanged.subscribe((data: AppTableItem[]) => {
+      this.dataSource.data = data;
+      console.log("from init data: ", data);
+      console.log("from init: this.dataSource.data ", [
+        ...this.dataSource.data
+      ]);
+    });
   }
 
   ngAfterViewInit(): void {
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
-    this.table.dataSource = this.dataSource;
+    // this.table.dataSource = this.dataSource;
   }
 }

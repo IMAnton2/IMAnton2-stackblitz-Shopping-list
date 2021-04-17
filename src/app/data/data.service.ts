@@ -10,7 +10,7 @@ export class DataService {
   private appData: AppTableDataSource;
   testdata: Subscription;
   private fbSubs: Subscription[] = [];
-  recipesChanged = new Subject<AppTableItem>();
+  recipesChanged = new Subject<AppTableItem[]>();
 
   constructor(private db: AngularFirestore) {}
 
@@ -31,8 +31,8 @@ export class DataService {
           });
         })
         .subscribe((data: AppTableItem[]) => {
-          console.log("from firebase", data);
-          this.recipesChanged.next(...data);
+          // console.log("from firebase", data);
+          this.recipesChanged.next(data);
         })
     );
   }
