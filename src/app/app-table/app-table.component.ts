@@ -48,4 +48,8 @@ export class AppTableComponent implements AfterViewInit, OnInit {
     this.dataSource.paginator = this.paginator;
     // this.table.dataSource = this.dataSource;
   }
+
+  doFilter(filterValue: string) {
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
 }

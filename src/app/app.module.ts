@@ -20,6 +20,9 @@ import { DataService } from "./data/data.service";
 import { AngularFireModule } from "@angular/fire";
 import { environment } from "../environments/environment";
 import { AngularFirestoreModule } from "@angular/fire/firestore";
+import { MatFormFieldModule } from "@angular/material/form-field";
+import { MatInputModule } from "@angular/material/input";
+import { FlexLayoutModule } from "@angular/flex-layout";
 
 @NgModule({
   declarations: [AppComponent, MainNavComponent, AppTableComponent],
@@ -39,7 +42,10 @@ import { AngularFirestoreModule } from "@angular/fire/firestore";
     MatSortModule,
     AngularFireModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
-    AngularFirestoreModule
+    AngularFirestoreModule,
+    MatFormFieldModule,
+    MatInputModule,
+    FlexLayoutModule
   ],
   providers: [DataService],
   bootstrap: [AppComponent]

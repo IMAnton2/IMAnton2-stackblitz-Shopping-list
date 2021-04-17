@@ -1,3 +1,14 @@
+<div fxLayoutAlign="center center">
+  <div fxFlex="40%">
+    <input
+      matInput
+      type="text"
+      (keyup)="doFilter($event.target.value)"
+      placeholder="Filter"
+    />
+  </div>
+</div>
+
 <div class="mat-elevation-z8">
   <table
     mat-table
